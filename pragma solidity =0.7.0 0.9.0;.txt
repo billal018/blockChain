@@ -1,0 +1,25 @@
+pragma solidity >=0.7.0 <0.9.0;
+contract SimpleCounter {
+    uint256 private count;
+
+    event CountUpdated(uint256 newCount);
+
+    constructor() {
+        count = 0;
+    }
+
+    function getCount() public view returns (uint256) {
+        return count;
+    }
+
+    function incrementCount(uint256 value) public {
+        count += value;
+        emit CountUpdated(count);
+    }
+
+    function decrementCount(uint256 value) public {
+        require(count >= value, "Count cannot be negative");
+        count -= value;
+        emit CountUpdated(count);
+    }
+}
